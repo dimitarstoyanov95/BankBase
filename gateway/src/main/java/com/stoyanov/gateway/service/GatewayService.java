@@ -1,5 +1,9 @@
 package com.stoyanov.gateway.service;
 
+import com.stoyanov.gateway.application.dto.CustomerDTO;
+import com.stoyanov.gateway.application.dto.PaymentDTO;
+import com.stoyanov.gateway.domain.Customer;
+import com.stoyanov.gateway.domain.Payment;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
