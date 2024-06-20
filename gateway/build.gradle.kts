@@ -4,7 +4,7 @@ plugins {
 	id("io.spring.dependency-management") version "1.1.5"
 }
 
-group = "com.stoyanov"
+group = "com.stoyanov.gateway"
 version = "0.0.1-SNAPSHOT"
 
 java {
@@ -55,5 +55,5 @@ val buildFlutterWeb = tasks.register<Exec>("buildFlutterWeb") {
 
 val copyFrontend = tasks.register<Exec>("copyFrontend") {
 	workingDir = file("../frontend/build")
-	commandLine("cp", "-r", "web", "../../backend/src/main/resources/static")
+	commandLine("cp", "-r", "web", "../../gateway/src/main/resources/static")
 }
