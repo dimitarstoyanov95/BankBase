@@ -6,14 +6,15 @@ import com.stoyanov.customer.application.repository.CustomerRepository;
 import com.stoyanov.customer.domain.exception.CustomerDuplicationException;
 import com.stoyanov.customer.domain.exception.CustomerNotFoundException;
 import com.stoyanov.customer.domain.model.Customer;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.UUID;
 
 @Service
+@AllArgsConstructor
 public class CustomerService {
 
     @Autowired
@@ -35,7 +36,7 @@ public class CustomerService {
     }
 
     public CustomerDTO create(CustomerDTO customerDTO) {
-        if (customerRepository.findByEmail(customerDTO.getEmail()) != null) {
+        if (customerRepository.findByEmail(customerDTO.getEmail()) == null) {
             Customer customer = customerMapper.toEntity(customerDTO);
             customerRepository.save(customer);
             return customerMapper.toDto(customer);
@@ -48,13 +49,12 @@ public class CustomerService {
                 .orElseThrow(() -> new CustomerNotFoundException(id));
 
         Customer updatedCustomer = customerMapper.toEntity(customerDTO);
-        updatedCustomer.setId(existingCustomer.getId()); // Ensure ID consistency
+        updatedCustomer.setId(existingCustomer.getId());
         customerRepository.save(updatedCustomer);
 
         return customerMapper.toDto(updatedCustomer);
     }
 
-    @Transactional
     public void delete(UUID id) {
         Customer existingCustomer = customerRepository.findById(id)
                 .orElseThrow(() -> new CustomerNotFoundException(id));

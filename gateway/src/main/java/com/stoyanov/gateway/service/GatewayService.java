@@ -15,7 +15,7 @@ public class GatewayService {
     private RestTemplate restTemplate;
 
     public CustomerDTO getCustomerById(Long id) {
-        Customer customer = restTemplate.getForObject("http://localhost:8081/customers/" + id, Customer.class);
+        Customer customer = restTemplate.getForObject("http://localhost:8080/customers/" + id, Customer.class);
         return new CustomerDTO(customer);
     }
 

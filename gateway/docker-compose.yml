@@ -1,0 +1,21 @@
+services:
+  gateway:
+    container_name: gateway-app
+    build:
+      context: ./gateway
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    depends_on:
+      - customer-service
+      - payment-service
+
+  gateway-postgres:
+    container_name: gateway-postgres-db
+    image: postgres:14-alpine
+    ports:
+      - "5433:5432"
+    environment:
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_USER=user
+      - POSTGRES_DB=payment_db
