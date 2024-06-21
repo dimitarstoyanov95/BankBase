@@ -1,15 +1,17 @@
 package com.stoyanov.customer.application.dto;
 
-import com.stoyanov.customer.domain.Customer;
+import com.stoyanov.customer.domain.model.Customer;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import java.util.UUID;
 
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class CustomerDTO {
-    private Long id;
-    private String name;
-
-    public CustomerDTO(Customer customer) {
-        this.id = customer.getId();
-        this.name = customer.getName();
-    }
+    private String firstName;
+    private String lastName;
+    private String email;
 }
