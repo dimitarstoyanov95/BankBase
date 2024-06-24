@@ -1,11 +1,21 @@
-rootProject.name = "explore"
+rootProject.name = "bank-base"
 
-include(":explore-frontend")
-include(":explore-gateway")
-include(":explore-customer-service")
-include(":explore-payment-service")
+val services = listOf(
+    "account-service",
+    "backup-service",
+    "deposit-service",
+    "investment-service",
+    "loan-service",
+    "notification-service",
+    "frontend",
+    "gateway",
+    "profile-service",
+    "payment-service",
+    "support-service",
+    "transaction-service"
+)
 
-project(":explore-frontend").projectDir = file("frontend")
-project(":explore-gateway").projectDir = file("gateway")
-project(":explore-customer-service").projectDir = file("customer-service")
-project(":explore-payment-service").projectDir = file("payment-service")
+services.forEach { service ->
+    include(":bank-base-$service")
+    project(":bank-base-$service").projectDir = file(service)
+}
