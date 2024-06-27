@@ -1,0 +1,22 @@
+services:
+  support-service:
+    container_name: support-service-app
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://support-postgres:5432/support_db
+    ports:
+      - "8089:8080"
+    depends_on:
+      - support-postgres
+
+  support-postgres:
+    container_name: support-db
+    image: postgres:14-alpine
+    ports:
+      - "5449:5432"
+    environment:
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_USER=user
+      - POSTGRES_DB=support_db

@@ -41,3 +41,7 @@ dependencies {
 tasks.test {
     useJUnitPlatform()
 }
+
+tasks.register<Exec>("runPaymentService") {
+    dependsOn(tasks.bootRun)
+}

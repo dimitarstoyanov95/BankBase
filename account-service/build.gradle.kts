@@ -41,3 +41,7 @@ dependencies {
 tasks.test {
   useJUnitPlatform()
 }
+
+tasks.register<Exec>("runAccountService") {
+  dependsOn(tasks.bootRun)
+}

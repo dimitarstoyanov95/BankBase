@@ -1,13 +1,19 @@
 # Build the artifact
 FROM bellsoft/liberica-openjdk-alpine:21 AS build
 
-## Copy project
+# Set the working directory within the container
+WORKDIR /app
+
 COPY . ./
 
-## Build the jar file
+# Ensure gradlew has execute permissions
+RUN chmod +x ./gradlew
+
+# Build the jar file
 RUN ./gradlew clean bootJar -Pprod
 
 # Run the application
 FROM bellsoft/liberica-openjre-alpine:21
-COPY --from=build /payment-service/build/libs/payment-service*.jar payment-service.jar
-ENTRYPOINT exec java $JAVA_OPTS -jar payment-service.jar $ARGS
+WORKDIR /app
+COPY --from=build /app/build/libs/payment-service*.jar payment-service.jar
+ENTRYPOINT ["java", "-jar", "payment-service.jar"]

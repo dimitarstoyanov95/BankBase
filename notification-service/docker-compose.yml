@@ -1,0 +1,22 @@
+services:
+  notification-service:
+    container_name: notification-service-app
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://notification-postgres:5432/notification_db
+    ports:
+      - "8086:8080"
+    depends_on:
+      - notification-postgres
+
+  notification-postgres:
+    container_name: notification-db
+    image: postgres:14-alpine
+    ports:
+      - "5446:5432"
+    environment:
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_USER=user
+      - POSTGRES_DB=notification_db

@@ -1,0 +1,22 @@
+services:
+  loan-service:
+    container_name: loan-service-app
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://loan-postgres:5432/loan_db
+    ports:
+      - "8085:8080"
+    depends_on:
+      - loan-postgres
+
+  loan-postgres:
+    container_name: loan-db
+    image: postgres:14-alpine
+    ports:
+      - "5445:5432"
+    environment:
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_USER=user
+      - POSTGRES_DB=loan_db

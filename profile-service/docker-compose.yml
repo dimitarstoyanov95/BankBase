@@ -1,22 +1,22 @@
 services:
-  customer-service:
-    container_name: customer-service-app
+  profile-service:
+    container_name: profile-service-app
     build:
       context: .
       dockerfile: Dockerfile
     environment:
-      - SPRING_DATASOURCE_URL=jdbc:postgresql://customer-postgres:5432/customer_db
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://profile-postgres:5432/profile_db
     ports:
-      - "8081:8080"
+      - "8088:8080"
     depends_on:
-      - customer-postgres
+      - profile-postgres
 
-  customer-postgres:
-    container_name: customer-db
+  profile-postgres:
+    container_name: profile-db
     image: postgres:14-alpine
     ports:
-      - "5432:5432"
+      - "5448:5432"
     environment:
       - POSTGRES_PASSWORD=password
       - POSTGRES_USER=user
-      - POSTGRES_DB=customer_db
+      - POSTGRES_DB=profile_db

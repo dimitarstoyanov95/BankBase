@@ -1,0 +1,22 @@
+services:
+  backup-service:
+    container_name: backup-service-app
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://backup-postgres:5432/backup_db
+    ports:
+      - "8081:8080"
+    depends_on:
+      - backup-postgres
+
+  backup-postgres:
+    container_name: backup-db
+    image: postgres:14-alpine
+    ports:
+      - "5441:5432"
+    environment:
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_USER=user
+      - POSTGRES_DB=backup_db

@@ -1,0 +1,22 @@
+services:
+  transaction-service:
+    container_name: transaction-service-app
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://transaction-postgres:5432/transaction_db
+    ports:
+      - "8090:8080"
+    depends_on:
+      - transaction-postgres
+
+  transaction-postgres:
+    container_name: transaction-db
+    image: postgres:14-alpine
+    ports:
+      - "5450:5432"
+    environment:
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_USER=user
+      - POSTGRES_DB=transaction_db

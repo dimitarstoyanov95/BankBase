@@ -1,0 +1,22 @@
+services:
+  investment-service:
+    container_name: investment-service-app
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://investment-postgres:5432/investment_db
+    ports:
+      - "8084:8080"
+    depends_on:
+      - investment-postgres
+
+  investment-postgres:
+    container_name: investment-db
+    image: postgres:14-alpine
+    ports:
+      - "5444:5432"
+    environment:
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_USER=user
+      - POSTGRES_DB=investment_db

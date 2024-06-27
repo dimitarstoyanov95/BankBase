@@ -43,6 +43,10 @@ tasks.withType<Test> {
 	useJUnitPlatform()
 }
 
+tasks.register<Exec>("runGatewayService") {
+	dependsOn(tasks.bootRun)
+}
+
 tasks.named("build") {
 	dependsOn(buildFlutterWeb, copyFrontend)
 }
