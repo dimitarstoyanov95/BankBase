@@ -1,11 +1,11 @@
-package com.example.support;
+package com.stoyanov.backup;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class SupportServiceApplication {
+public class BackupServiceApplication {
     public static void main(String[] args) {
-        SpringApplication.run(SupportServiceApplication.class, args);
+        SpringApplication.run(BackupServiceApplication.class, args);
     }
 }

@@ -1,12 +1,11 @@
-package com.example.account;
+package com.stoyanov.investment;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class AccountServiceApplication {
+public class InvestmentServiceApplication {
     public static void main(String[] args) {
-        SpringApplication.run(AccountServiceApplication.class, args);
+        SpringApplication.run(InvestmentServiceApplication.class, args);
     }
 }
-
