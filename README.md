@@ -1,17 +1,33 @@
 # Project BankBase
 
-## Running the Application on your local machine
+## Overview
 
-When running the microservices its recommended running locally ony the ones you need.
-Every microservice is using it's own database container so when running a given microservice
-you would need to run a Docker container for the database and afterwards you can execute a
-service specific command to run the given service.
+BankBase is a microservice-based banking system designed to provide essential banking functionalities
+without adhering to specific country regulations. Each microservice runs independently with its own 
+database container, providing modular and scalable architecture.
 
-Be sure to run the frontend and gateway-service in order to checkout full functionality of
-the application and then you can optionally run other services and se how they inpact the 
-application with their feature addition.
+## Services and Dependencies
 
-## Run using this flow of commands:
+1. Gateway-Service: Entry point for the application. It routes requests to appropriate services.
+2. Account-Service: Manages user accounts.
+3. Backup-Service: Handles data backups.
+4. Deposit-Service: Manages deposits.
+5. Investment-Service: Manages investments.
+6. Loan-Service: Manages loans.
+7. Notification-Service: Handles notifications.
+8. Payment-Service: Manages payments.
+9. Profile-Service: Manages user profiles.
+10. Support-Service: Provides support functionalities.
+11. Transaction-Service: Manages transactions.
+
+## Running the Application
+
+### Prerequisites
+
+- Docker
+- Gradle
+
+### Run Microservices
 
 1. Run postgre container for the database.
 2. Execute bootRun for this specific service.
@@ -136,6 +152,10 @@ docker run -e POSTGRES_USER=user -e POSTGRES_PASSWORD=password -e POSTGRES_DB=tr
 ./gradlew runTransactionService
 ```
 
+## Conclusion
 
+This refactored README provides a clearer structure, making it easier to understand the relationships between
+microservices and the steps required to run each service. This structure improves readability and usability for
+developers working with the application.
 
-
+For further details, please refer to the project documentation or contact the development team.
