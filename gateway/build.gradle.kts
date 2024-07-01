@@ -48,7 +48,7 @@ tasks.register<Exec>("runGatewayService") {
 }
 
 tasks.named("build") {
-	dependsOn(buildFlutterWeb, copyFrontend)
+	dependsOn(buildFlutterWeb) // copyFrontend
 }
 
 // Frontend
@@ -57,7 +57,7 @@ val buildFlutterWeb = tasks.register<Exec>("buildFlutterWeb") {
 	commandLine("flutter", "build", "web")
 }
 
-val copyFrontend = tasks.register<Exec>("copyFrontend") {
-	workingDir = file("../frontend/build")
-	commandLine("cp", "-r", "web", "../../gateway/src/main/resources/static")
-}
+//val copyFrontend = tasks.register<Exec>("copyFrontend") {
+//	workingDir = file("../frontend/build")
+//	commandLine("cp", "-r", "web", "../../gateway/src/main/resources/static")
+//}
