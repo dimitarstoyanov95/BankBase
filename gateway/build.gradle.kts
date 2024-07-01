@@ -52,6 +52,11 @@ tasks.named("build") {
 }
 
 // Frontend
+val startFrontend = tasks.register<Exec>("startFrontend") {
+	workingDir = file("../frontend/build/web")
+	commandLine("python3", "-m", "http.server")
+}
+
 val buildFlutterWeb = tasks.register<Exec>("buildFlutterWeb") {
 	workingDir = file("../frontend")
 	commandLine("flutter", "build", "web")

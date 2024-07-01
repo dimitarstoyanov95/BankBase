@@ -4,19 +4,5 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    environment:
-      - SPRING_DATASOURCE_URL=jdbc:postgresql://gateway-postgres:5432/gateway_db
     ports:
       - "8083:8080"
-    depends_on:
-      - gateway-postgres
-
-  gateway-postgres:
-    container_name: gateway-db
-    image: postgres:14-alpine
-    ports:
-      - "5443:5432"
-    environment:
-      - POSTGRES_PASSWORD=password
-      - POSTGRES_USER=user
-      - POSTGRES_DB=gateway_db

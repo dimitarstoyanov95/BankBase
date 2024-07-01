@@ -32,11 +32,14 @@ database container, providing modular and scalable architecture.
 1. Run postgre container for the database.
 2. Execute bootRun for this specific service.
 
-### Run Gateway-Service
+
+### Run Frontend
 
 ```bash
-docker run -e POSTGRES_USER=user -e POSTGRES_PASSWORD=password -e POSTGRES_DB=gateway_db -p 5443:5432 -d postgres
+./gradlew startFrontend
 ```
+
+### Run Gateway-Service
 
 ```bash
 ./gradlew runGatewayService
