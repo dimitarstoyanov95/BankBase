@@ -1,6 +1,7 @@
 package com.stoyanov.customer.application.controller;
 
 import com.stoyanov.customer.application.dto.ProfileDTO;
+import com.stoyanov.customer.application.dto.ProfilePasswordDTO;
 import com.stoyanov.customer.application.service.ProfileService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -11,7 +12,7 @@ import java.util.List;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("/customers")
+@RequestMapping("/v1/profile")
 public class ProfileController {
 
     @Autowired
@@ -30,8 +31,8 @@ public class ProfileController {
     }
 
     @PostMapping
-    public ResponseEntity<ProfileDTO> create(@RequestBody ProfileDTO profileDTO) {
-        ProfileDTO createdCustomer = profileService.create(profileDTO);
+    public ResponseEntity<ProfileDTO> create(@RequestBody ProfilePasswordDTO profilePasswordDTO) {
+        ProfileDTO createdCustomer = profileService.create(profilePasswordDTO);
         return ResponseEntity.status(HttpStatus.CREATED).body(createdCustomer);
     }
 

@@ -8,6 +8,8 @@ import 'package:frontend/ui/notifications/notifications.dart';
 import 'package:frontend/ui/payment/pay-bills.dart';
 import 'package:frontend/ui/support/support.dart';
 import 'package:frontend/ui/transactions/send.dart';
+import 'package:frontend/ui/loggin/loggin.dart';
+import 'package:frontend/ui/loggin/sign-up.dart';
 
 void main() {
   runApp(MyApp());
@@ -23,8 +25,11 @@ class MyApp extends StatelessWidget {
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
       debugShowCheckedModeBanner: false,
-      home: MainPage(),
+      initialRoute: '/login', // Set the initial route to the login page
       routes: {
+        '/login': (context) => LoginPage(),
+        '/home': (context) => MainPage(),
+        '/createAccount': (context) => CreateAccountPage(),
         '/send': (context) => SendPage(),
         '/pay': (context) => PayBillsPage(),
         '/deposit': (context) => DepositPage(),
@@ -99,7 +104,7 @@ class MainPage extends StatelessWidget {
         onTap: (index) {
           switch (index) {
             case 0:
-              Navigator.pushReplacementNamed(context, '/');
+              Navigator.pushReplacementNamed(context, '/home');
               break;
             case 1:
               Navigator.pushNamed(context, '/send');

@@ -1,6 +1,7 @@
 package com.stoyanov.customer.application.mapper;
 
 import com.stoyanov.customer.application.dto.ProfileDTO;
+import com.stoyanov.customer.application.dto.ProfilePasswordDTO;
 import com.stoyanov.customer.domain.model.Profile;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -79,6 +80,36 @@ class ProfileMapperTest {
         assertThat(profiles.get(1).getFirstName()).isEqualTo(secondProfileDto.getFirstName());
     }
 
+    @Test
+    void testToPasswordDto_whenGivenCustomerWithPassword_shouldReturnProfilePasswordDTO() {
+        // Given
+        Profile profile = createCustomerWithPassword("Viktor", "Rentea", "viktorentea@gmail.com", "password");
+
+        // When
+        ProfilePasswordDTO dto = profileMapper.toPasswordDto(profile);
+
+        // Then
+        assertThat(dto.getFirstName()).isEqualTo(profile.getFirstName());
+        assertThat(dto.getLastName()).isEqualTo(profile.getLastName());
+        assertThat(dto.getEmail()).isEqualTo(profile.getEmail());
+        assertThat(dto.getPassword()).isEqualTo(profile.getPassword());
+    }
+
+    @Test
+    void testToPasswordEntity_whenGivenProfilePasswordDTO_shouldReturnCustomerWithPassword() {
+        // Given
+        ProfilePasswordDTO dto = createCustomerPasswordDTO("Viktor", "Rentea", "viktorentea@gmail.com", "password");
+
+        // When
+        Profile profile = profileMapper.toPasswordEntity(dto);
+
+        // Then
+        assertThat(profile.getFirstName()).isEqualTo(dto.getFirstName());
+        assertThat(profile.getLastName()).isEqualTo(dto.getLastName());
+        assertThat(profile.getEmail()).isEqualTo(dto.getEmail());
+        assertThat(profile.getPassword()).isEqualTo(dto.getPassword());
+    }
+
     private Profile createCustomer(String firstName, String lastName, String email) {
         Profile profile = new Profile();
         profile.setId(UUID.randomUUID());
@@ -88,11 +119,26 @@ class ProfileMapperTest {
         return profile;
     }
 
+    private Profile createCustomerWithPassword(String firstName, String lastName, String email, String password) {
+        Profile profile = createCustomer(firstName, lastName, email);
+        profile.setPassword(password);
+        return profile;
+    }
+
     private ProfileDTO createCustomerDTO(String firstName, String lastName, String email) {
         ProfileDTO dto = new ProfileDTO();
         dto.setFirstName(firstName);
         dto.setLastName(lastName);
         dto.setEmail(email);
+        return dto;
+    }
+
+    private ProfilePasswordDTO createCustomerPasswordDTO(String firstName, String lastName, String email, String password) {
+        ProfilePasswordDTO dto = new ProfilePasswordDTO();
+        dto.setFirstName(firstName);
+        dto.setLastName(lastName);
+        dto.setEmail(email);
+        dto.setPassword(password);
         return dto;
     }
 }

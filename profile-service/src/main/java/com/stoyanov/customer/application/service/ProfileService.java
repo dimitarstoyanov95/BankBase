@@ -1,6 +1,7 @@
 package com.stoyanov.customer.application.service;
 
 import com.stoyanov.customer.application.dto.ProfileDTO;
+import com.stoyanov.customer.application.dto.ProfilePasswordDTO;
 import com.stoyanov.customer.application.mapper.ProfileMapper;
 import com.stoyanov.customer.domain.model.Profile;
 import com.stoyanov.customer.domain.repository.ProfileRepository;
@@ -35,13 +36,13 @@ public class ProfileService {
         return profileMapper.toDtoList(profiles);
     }
 
-    public ProfileDTO create(ProfileDTO profileDTO) {
-        if (profileRepository.findByEmail(profileDTO.getEmail()) == null) {
-            Profile profile = profileMapper.toEntity(profileDTO);
+    public ProfileDTO create(ProfilePasswordDTO profilePasswordDTO) {
+        if (profileRepository.findByEmail(profilePasswordDTO.getEmail()) == null) {
+            Profile profile = profileMapper.toPasswordEntity(profilePasswordDTO);
             profileRepository.save(profile);
             return profileMapper.toDto(profile);
         }
-        throw new ProfileDuplicationException(profileDTO.getEmail());
+        throw new ProfileDuplicationException(profilePasswordDTO.getEmail());
     }
 
     public ProfileDTO update(UUID id, ProfileDTO profileDTO) {

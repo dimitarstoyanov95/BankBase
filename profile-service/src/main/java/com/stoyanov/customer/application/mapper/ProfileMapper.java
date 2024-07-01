@@ -1,6 +1,7 @@
 package com.stoyanov.customer.application.mapper;
 
 import com.stoyanov.customer.application.dto.ProfileDTO;
+import com.stoyanov.customer.application.dto.ProfilePasswordDTO;
 import com.stoyanov.customer.domain.model.Profile;
 import org.springframework.stereotype.Component;
 
@@ -23,6 +24,24 @@ public class ProfileMapper {
         entity.setFirstName(dto.getFirstName());
         entity.setLastName(dto.getLastName());
         entity.setEmail(dto.getEmail());
+        return entity;
+    }
+
+    public ProfilePasswordDTO toPasswordDto(Profile profile) {
+        ProfilePasswordDTO dto = new ProfilePasswordDTO();
+        dto.setFirstName(profile.getFirstName());
+        dto.setLastName(profile.getLastName());
+        dto.setEmail(profile.getEmail());
+        dto.setPassword(profile.getPassword());
+        return dto;
+    }
+
+    public Profile toPasswordEntity(ProfilePasswordDTO dto) {
+        Profile entity = new Profile();
+        entity.setFirstName(dto.getFirstName());
+        entity.setLastName(dto.getLastName());
+        entity.setEmail(dto.getEmail());
+        entity.setPassword(dto.getPassword());
         return entity;
     }
 

@@ -1,6 +1,7 @@
 package com.stoyanov.customer.application.service;
 
 import com.stoyanov.customer.application.dto.ProfileDTO;
+import com.stoyanov.customer.application.dto.ProfilePasswordDTO;
 import com.stoyanov.customer.application.mapper.ProfileMapper;
 import com.stoyanov.customer.domain.model.Profile;
 import com.stoyanov.customer.domain.repository.ProfileRepository;
@@ -78,20 +79,26 @@ class ProfileServiceTest {
     @Test
     void testCreate_whenEmailDoesNotExist_shouldCreateCustomer() {
         // Given
-        ProfileDTO profileDTO = createCustomerDTO("Viktor", "Rentea", "viktorentea@example.com");
-        Profile profile = createCustomer("Viktor", "Rentea", "viktorentea@example.com");
+        ProfilePasswordDTO profileDTO = new ProfilePasswordDTO("Viktor", "Rentea", "viktorentea@example.com", "pass");
+        Profile profile = new Profile();
+        profile.setFirstName("Viktor");
+        profile.setLastName("Rentea");
+        profile.setEmail("viktorentea@example.com");
+        profile.setPassword("pass");
+
         when(profileRepository.findByEmail(profileDTO.getEmail())).thenReturn(null);
-        when(profileMapper.toEntity(profileDTO)).thenReturn(profile);
-        when(profileMapper.toDto(profile)).thenReturn(profileDTO);
+        when(profileMapper.toPasswordEntity(profileDTO)).thenReturn(profile);
         when(profileRepository.save(profile)).thenReturn(profile);
+        when(profileMapper.toDto(profile)).thenReturn(new ProfileDTO("Viktor", "Rentea", "viktorentea@example.com"));
 
         // When
         ProfileDTO result = profileService.create(profileDTO);
 
         // Then
         assertThat(result.getEmail()).isEqualTo(profileDTO.getEmail());
+
         verify(profileRepository).findByEmail(profileDTO.getEmail());
-        verify(profileMapper).toEntity(profileDTO);
+        verify(profileMapper).toPasswordEntity(profileDTO);
         verify(profileRepository).save(profile);
         verify(profileMapper).toDto(profile);
     }
@@ -99,7 +106,7 @@ class ProfileServiceTest {
     @Test
     void testCreate_whenEmailExists_shouldThrowException() {
         // Given
-        ProfileDTO profileDTO = createCustomerDTO("Uncle", "Bob", "unclebob@example.com");
+        ProfilePasswordDTO profileDTO = createCustomerDTOWithPassword("Uncle", "Bob", "unclebob@example.com", "pass");
         Profile existingProfile = createCustomer("Uncle", "Bob", "unclebob@example.com");
         when(profileRepository.findByEmail(profileDTO.getEmail())).thenReturn(existingProfile);
 
@@ -184,6 +191,15 @@ class ProfileServiceTest {
         dto.setFirstName(firstName);
         dto.setLastName(lastName);
         dto.setEmail(email);
+        return dto;
+    }
+
+    private ProfilePasswordDTO createCustomerDTOWithPassword(String firstName, String lastName, String email, String password) {
+        ProfilePasswordDTO dto = new ProfilePasswordDTO();
+        dto.setFirstName(firstName);
+        dto.setLastName(lastName);
+        dto.setEmail(email);
+        dto.setPassword(password);
         return dto;
     }
 }

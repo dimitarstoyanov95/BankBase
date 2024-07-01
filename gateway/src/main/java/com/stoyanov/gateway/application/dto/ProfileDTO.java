@@ -1,4 +1,4 @@
-package com.stoyanov.customer.application.dto;
+package com.stoyanov.gateway.application.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
