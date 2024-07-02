@@ -45,6 +45,16 @@ database container, providing modular and scalable architecture.
 ./gradlew runGatewayService
 ```
 
+### Run Profile-Service
+
+
+```bash
+docker run -e POSTGRES_USER=user -e POSTGRES_PASSWORD=password -e POSTGRES_DB=profile_db -p 5448:5432 -d postgres
+```
+
+```bash
+./gradlew runProfileService
+```
 
 ### Run Account-Service
 
@@ -120,17 +130,6 @@ docker run -e POSTGRES_USER=user -e POSTGRES_PASSWORD=password -e POSTGRES_DB=pa
 
 ```bash
 ./gradlew runPaymentService
-```
-
-### Run Profile-Service
-
-
-```bash
-docker run -e POSTGRES_USER=user -e POSTGRES_PASSWORD=password -e POSTGRES_DB=profile_db -p 5448:5432 -d postgres
-```
-
-```bash
-./gradlew runProfileService
 ```
 
 ### Run Support-Service
